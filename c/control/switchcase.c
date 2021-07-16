@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*							a <= b  m!= n  2+3
+/*							a <= b  m!= n 
 switch(exp)
 {
-	case 常整形1:     		//3 25  'a'  '\n' 
+	case 常整形1:     		//3 25  'a'  '\n' 2+3
 		;
 		;
 		break;
