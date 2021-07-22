@@ -22,7 +22,7 @@ int main()
 
 	
 ->		p[0]	p+1		p++		 p  	*p
-	    int *   int*    FFFF     int*   *(p+0)=>p[0]int*
+	    int *   int**    FFFF    int**   *(p+0)=>p[0]int*
 
 
 ->	int a[3];
