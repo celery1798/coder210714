@@ -12,12 +12,15 @@ int main()
 	int *q = *a;
 	int *x[3] = {&i,&j,&k};
 
-->	a[0] 	 a[0][0]	*a		**a		p[0]	p+1			p[1][1]		*p	
-	int*	 int		int* 	int		int*	int(*)[3]	int			int*
-
+->	a[0] 	a[1]+1	 a[0][0]	*a		**a		p[0]	p+1			p[1][1]		*p	
+	int*	 int*	 int		int* 	int		int*	int(*)[3]	int			int*
+	 
 	
 	*q		q[2]		q+4     x[0]	*x		
 	int		int			int*	int*	int*	
+	
+
+	T a[3];	*a => *(a+0) => a[0] -> T
 
 
 
