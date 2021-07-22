@@ -7,15 +7,28 @@ int main()
 	int i = 100,j = 200;
 	int *p = arr,*q = &arr[2];
 	int *m = &i, *n = &j;
+	int **x = &m, **y = &n;
 
 	本质：
-	i   p      i+j		i*=2	p++		*p	 p[0]	q[0]	q--		*(q--)	 arr++      *m+3     n    p+2   *(p+2)   *p+2    *p++
+->	i   p      i+j		i*=2	p++		*p	 p[0]	q[0]	q--		*(q--)	 arr++      *m+3     n    p+2   *(p+2)   *p+2    *p++
+
    int  int*   int		int		int*	int	  int	int		int*	int		  FFFF
 int		int*   int*   int     int	  int
 
 	
+->	*x     **y    **x     *y+1
+	int*   int     int    int*
+ 
+
+
 
 	下述代码发生了什么
+0:	*x = n;
+	*n = 1;
+	**y = 3;
+	**x = 5;
+
+
 1:	m = n;
 	*m = 1;
 
