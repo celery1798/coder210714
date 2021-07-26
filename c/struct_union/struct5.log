@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct student_st
+{
+	char name[12];
+	int age;
+	float math;
+};
+
+func( struct student_st , struct student_st *, struct student_st, int , float , struct student_st * , char *, struct student_st (*)[3], struct student_st, struct student_st *){  ... }
+
+int main()
+{
+	struct student_st s2;
+	struct student_st *x = &s2;
+	struct student_st s[3];
+	struct student_st s1[2][3];
+	struct student_st *p = s;
+	struct student_st (*q)[3] = s1;
+
+
+	func(s[0], p+1, *p , s[1].age, p[0].math, x , x->name , q+1 , *p , q[0])
+
+	exit(0);
+}
+
