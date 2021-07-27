@@ -1,0 +1,88 @@
+TYPE NAME = VALUE;
+
+typedef 已有类型  新名字；
+
+typedef int INT;
+INT i;  ->  int i;
+
+typedef int *INTP;
+INTP p,q;  -> int *p,*q;
+
+typedef int ARR[3];				->int[3]  ARR;
+ARR a,b;	-> int a[3],b[3];
+-------------------------------------
+#define INT int
+INT i;  ->  int i;
+
+typedef int INT;
+INT i;  ->  int i;
+-------
+#define INTP int *
+INTP i,j;  ->  int *i,j;
+------------------------------------------------
+int a[3]; 		-> int[3]  a;
+typedef int ARR[3];  -> int[3]  ARR
+ARR a; -> int a[3];
+
+
+typedef int ARR[2][3];			-> int[2][3]  ARR
+ARR a;  ->  int a[2][3];
+---------------------------------------------
+typedef int FUNC(int,int);		-> int(int,int)  FUNC
+FUNC f; -> int f(int,int);
+
+typedef int (*F)(int *,int*);		-> int(int*,int*) *    F
+F  p; -> int (*p)(int *,int*);
+
+typedef int *(*FUNC)(int*,int*);  ->int*(int*,int*) *   FUNC
+
+
+
+typedef int *(*FUNC[3])(int*,int*);  -> int*(int*,int*) * [3]  FUNC
+
+
+--------------------------------------------------------------
+
+struct student_st
+{
+	int id;
+	char name[32];
+	float math;
+}
+
+typedef struct student_st STU;
+
+struct student_st s;
+STU s;
+----------------------------
+
+typedef struct student_st
+{
+    int id;
+    char name[32];
+    float math;
+}STU,*STUP;             -> struct student_st STU;
+  						-> struct student_st * STUP
+STU s  -> struct student_st s;
+STU *p -> struct student_st *p;
+STUP p  -> struct student_st *p;
+
+
+---------------------------------------------------------
+
+void (*signal(int signo,void (*func)(int)))(int);
+
+
+
+void (*  signal(int signo,void (*func)(int))  )  (int);
+
+void(*)(int)    signal (int , void (*)(int) )
+
+
+typedef void (*FUNCP)(int); 
+
+FUNCP signal(int , FUNCP p);
+
+
+
+
