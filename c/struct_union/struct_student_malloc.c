@@ -5,13 +5,13 @@
 
 #define NAMEMAX		1024
 
-struct student_st
+typedef struct 
 {
 	int id;
 	char *name;
 	float math;
 	float chinese;
-};
+}STU;
 
 void menu()
 {
@@ -21,30 +21,62 @@ void menu()
 
 }
 
-void set(struct student_st *p)
+int set(STU *p)
 {
+	char buf[NAMEMAX];
 	printf("Please enter :");
-	scanf("%d%s%f%f",&p->id,p->name,&p->math,&p->chinese);
+	scanf("%d%s%f%f",&p->id, buf,&p->math,&p->chinese);
+	p->name = malloc(strlen(buf)+1);
+	if(p->name == NULL)
+	{
+		return -1;
+	}
+	strcpy(p->name,buf);
+	return 0;
 }
 
-void show(struct student_st *p)
+void show(STU *p)
 {
 	printf("%d %s %f %f\n",p->id,p->name, p->math, p->chinese);
 }
 
-void changename(struct student_st *p)
+int changename(STU *p)
 {
-	char newname[NAMESIZE];
-
+	char newname[NAMEMAX];
+	
 	printf("Please enter the NEW NAME:");
 	scanf("%s",newname);
+	
+	free(p->name);
+	p->name = malloc(strlen(newname)+1);
+	if(p->name == NULL)
+		return -1;
 	strcpy(p->name,newname);
+	return 0;
+}
+
+void init(STU *p)
+{
+	p->id = p->math = p->chinese = 0;
+	p->name = malloc(1);
+	/*if error*/
+	*(p->name) = '\0';
+}
+
+void destroy(STU *p)
+{
+	free(p->name);
+	p->name = NULL;
 }
 
 int main()
 {
-	struct student_st s = {0,"",0,0};
+//	STU s = {0,NULL,0,0};
+	STU s;
 	int ch;
+
+	init(&s);
+
 
 	while(1)
 	{
@@ -68,6 +100,9 @@ int main()
 		}
 		sleep(1);
 	}
+
+	destroy(&s);
+	
 
 	exit(0);
 }
