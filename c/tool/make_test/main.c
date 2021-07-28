@@ -8,6 +8,7 @@ int main()
 {
 
 	mod1_print();
+	mod1_print();
 	mod2_print();
 
 	exit(0);

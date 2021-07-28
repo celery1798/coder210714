@@ -1,0 +1,18 @@
+
+
+myproj:main.o mod1.o mod2.o
+	gcc main.o mod1.o mod2.o -o myproj
+
+main.o:main.c
+	gcc -g -Wall -c main.c -o main.o
+
+mod1.o:mod1.c
+	gcc -g -Wall -c mod1.c -o mod1.o
+
+mod2.o:mod2.c
+	gcc -g -Wall -c mod2.c -o mod2.o
+
+
+
+
+

@@ -1,0 +1,21 @@
+OBJS=main.o
+OBJS+=mod1.o mod2.o
+CFLAGS=-g -Wall
+
+myproj:$(OBJS)
+	$(CC) $(OBJS) -o myproj
+
+main.o:main.c
+	$(CC) $(CFLAGS) -c main.c -o main.o
+
+mod1.o:mod1.c
+	$(CC) $(CFLAGS) -c mod1.c -o mod1.o
+
+mod2.o:mod2.c
+	$(CC) $(CFLAGS) -c mod2.c -o mod2.o
+
+
+clean:
+	rm -rf  *.o  myproj
+
+
