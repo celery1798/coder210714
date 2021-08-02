@@ -8,6 +8,7 @@ typedef struct node_st
 }LIST;
 
 LIST *list_create();
+void list_create1(LIST **p);
 
 int list_isempty(LIST *);
 
@@ -19,7 +20,7 @@ int list_delete(LIST *,int pos, int *newdata);
 int list_insert_value(LIST *,int *newdata);
 int list_delete_value(LIST *,int *newdata);
 
-int list_find(LIST *int *data);
+int list_find(LIST *,int *data);
 
 void list_display(LIST *);
 
