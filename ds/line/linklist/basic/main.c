@@ -18,17 +18,25 @@ int main()
 	}
 
 	for(i = 0 ; i < sizeof(a)/sizeof(*a); i++)
-		list_insert(handler, 0, &a[i]);
+//		list_insert(handler, 0, &a[i]);
+		list_insert_value(handler,&a[i]);
+	list_display(handler);
 
+	int tmp = 18;
+	list_delete_value(handler,&tmp);
 	list_display(handler);
 
 /*
-	int tmp = 100;
 	list_insert(handler,15,&tmp);
 	list_display(handler);
 */
 
+//	list_delete(handler,14,NULL);
+//	printf("FIND:%d\n",list_find(handler,&tmp));
 
+//	list_display(handler);
+
+	list_destroy(handler);
 	exit(0);
 }
 
