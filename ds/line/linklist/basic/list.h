@@ -27,6 +27,10 @@ void list_display(LIST *);
 void list_destroy(LIST *);
 
 
+//-> - 4 6 8      -> - 8 6  4
+void list_reverse(LIST *);		
+
+
 #endif
 
 
