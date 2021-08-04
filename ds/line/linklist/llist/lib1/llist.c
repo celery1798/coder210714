@@ -56,6 +56,20 @@ int llist_insert(LLIST *ptr, const void *data,int mode)
 	return 0;
 }
 
+void *llist_find(LLIST *ptr,const void *key,llist_cmp *cmp)
+{
+
+	struct llist_node_st *cur;
+
+	for(cur = ptr->head.next; cur != &ptr->head ; cur = cur->next)
+	{
+		if(cmp(key, cur->data) == 0)
+			return cur->data;
+	}
+
+	return NULL;
+
+}
 
 
 void llist_travel(LLIST *ptr, llist_op *op)

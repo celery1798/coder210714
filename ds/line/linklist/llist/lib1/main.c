@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "llist.h"
 
@@ -19,6 +20,21 @@ void print_s(void *data)
 	printf("%d %s %d\n",d->id, d->name, d->math);
 }
 
+int id_cmp(const void *key, const void *data)
+{
+	const int *k = key;
+	const struct score_st *d = data;
+
+	return *k - d->id;
+}
+
+int name_cmp(const void *key, const void *data)
+{
+	const char *k = key;
+	const struct score_st *d = data;
+
+	return strcmp(k, d->name);
+}
 
 int main()
 {
@@ -44,6 +60,18 @@ int main()
 	}
 
 	llist_travel(handler,print_s);
+	printf("\n\n");
+
+	int findid = 13;
+	char *findname = "STU40";
+	struct score_st *retp;
+
+	//retp = llist_find(handler,&findid,id_cmp);
+	retp = llist_find(handler,findname,name_cmp);
+	if(retp)
+		print_s(retp);
+	else
+		printf("Can not find.\n");
 
 	exit(0);
 }
