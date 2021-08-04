@@ -12,6 +12,13 @@ struct score_st
 	int math;
 };
 
+void print_s(void *data)
+{
+	struct score_st *d = data;
+
+	printf("%d %s %d\n",d->id, d->name, d->math);
+}
+
 
 int main()
 {
@@ -33,10 +40,10 @@ int main()
 		tmp.math = 100-i;
 		snprintf(tmp.name, NAMESIZE,"STU%d",i);
 
-		llist_insert(handler, &tmp, LLIST_FORWARD);
+		llist_insert(handler, &tmp, LLIST_BACKWARD);
 	}
 
-	llist_travel();
+	llist_travel(handler,print_s);
 
 	exit(0);
 }

@@ -4,6 +4,8 @@
 #define LLIST_FORWARD		1
 #define LLIST_BACKWARD		2
 
+typedef void llist_op(void *);
+
 struct llist_node_st
 {
 	void *data;
@@ -25,7 +27,7 @@ int llist_insert(LLIST *, const void *data,int mode);
 
 //llist_find();
 
-     llist_travel();
+void llist_travel(LLIST *, llist_op *op);
 
 //void llist_destroy();
 

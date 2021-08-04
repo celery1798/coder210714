@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include "llist.h"
 
@@ -54,6 +55,26 @@ int llist_insert(LLIST *ptr, const void *data,int mode)
 
 	return 0;
 }
+
+
+
+void llist_travel(LLIST *ptr, llist_op *op)
+{
+	struct llist_node_st *cur;
+
+	for(cur = ptr->head.next; cur != &ptr->head ; cur = cur->next)
+		op(cur->data);
+
+}
+
+
+
+
+
+
+
+
+
 
 
 
