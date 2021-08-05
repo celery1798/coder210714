@@ -62,16 +62,28 @@ int main()
 	llist_travel(handler,print_s);
 	printf("\n\n");
 
-	int findid = 13;
+	int findid = 12;
 	char *findname = "STU40";
 	struct score_st *retp;
 
+/*
 	//retp = llist_find(handler,&findid,id_cmp);
 	retp = llist_find(handler,findname,name_cmp);
 	if(retp)
 		print_s(retp);
 	else
 		printf("Can not find.\n");
+*/
+//	llist_delete(handler,&findid,id_cmp);
+	if(llist_fetch(handler,&findid,id_cmp,&tmp) == 0)
+		print_s(&tmp);
+	printf("\n\n");	
+	
+
+	llist_travel(handler,print_s);
+
+
+	llist_destroy(handler);
 
 	exit(0);
 }
