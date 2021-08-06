@@ -19,7 +19,7 @@ int stack_push(STACK *, const int *x);
 int stack_pop(STACK *, int *x);
 int stack_top(STACK *,int *x);	//取栈顶元素查看,不出栈
 
-void display(STACK *);
+void stack_display(STACK *);
 
 void stack_destroy(STACK *);
 
