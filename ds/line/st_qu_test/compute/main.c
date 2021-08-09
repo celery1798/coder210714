@@ -93,7 +93,7 @@ void deal_op(STACK *snum, STACK *sop, int op)
 
 int main()
 {
-	char str[] = "11-(5-3)*6+15";
+	char str[] = "1+2*3";  //"11-(5-3)*6+15";
 	STACK *snum,*sop;
 	int i = 0,value = 0,flag = 0;
 	int old_op;
@@ -134,9 +134,12 @@ int main()
 	{
 		stack_push(snum,&value);
 	}
-	
-	stack_pop(sop,&old_op);
-	compute(snum,old_op);
+
+	while(!stack_isempty(sop))
+	{
+		stack_pop(sop,&old_op);
+		compute(snum,old_op);
+	}
 
 	stack_pop(snum,&value);
 
