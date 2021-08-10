@@ -54,6 +54,29 @@ struct score_st *find(struct node_st *root, int id)
 	return find(root->r,id);
 }
 
+static void draw_(struct node_st *root,int level)
+{
+	int i;
+
+	if(root == NULL)
+		return ; 
+
+	draw_(root->r,level+1);
+
+	for(i = 0 ; i < level; i++)
+		printf("    ");
+	print_s(&root->data);
+
+	draw_(root->l,level+1);
+
+}
+
+void draw(struct node_st *root)
+{
+
+	draw_(root,0);
+
+}
 
 int main()
 {
@@ -71,12 +94,18 @@ int main()
 		insert(&tree,&tmp);
 	}
 
+/*
 	int findid = 16;
 	retp = find(tree,findid);
 	if(retp == NULL)
 		printf("Can not find\n");
 	else
 		print_s(retp);
+*/
+
+	draw(tree);
+
+
 
 	exit(0);
 }
