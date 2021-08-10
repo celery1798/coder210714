@@ -105,7 +105,9 @@ int main()
 
 	draw(tree);
 
+	balance(   );
 
+	draw(tree);
 
 	exit(0);
 }
