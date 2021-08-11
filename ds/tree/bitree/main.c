@@ -16,6 +16,13 @@ struct node_st
 	struct node_st *l,*r;
 };
 
+
+
+static struct node_st *tree = NULL;
+
+
+
+
 void print_s(void *data)
 {
 	struct score_st *d = data;
@@ -75,12 +82,79 @@ void draw(struct node_st *root)
 {
 
 	draw_(root,0);
+	printf("\n\n");
+	getchar();
 
 }
 
+static int get_num(struct node_st *root)
+{
+	if(root == NULL)
+		return 0;
+	return get_num(root->l) + 1 + get_num(root->r);
+}
+static struct node_st *find_min(struct node_st *root)
+{
+	if(root->l == NULL)
+		return root;
+	return find_min(root->l);
+}
+
+static void turn_left(struct node_st **root)
+{
+	struct node_st *cur = *root;
+
+	*root = cur->r;
+	cur->r = NULL;
+	find_min(*root)->l = cur;
+
+//	draw(tree);
+}
+
+static struct node_st *find_max(struct node_st *root)
+{
+	if(root->r == NULL)
+		return root;
+	return find_max(root->r);
+}  
+
+static void turn_right(struct node_st **root)
+{
+	struct node_st *cur = *root;
+
+	*root = cur->l;
+	cur->l = NULL;
+	find_max(*root)->r = cur;
+
+//	draw(tree);
+}
+
+void balance(struct node_st **root)
+{
+	int sub;
+
+	if(*root == NULL)
+		return ;
+
+	while(1)
+	{
+		sub = get_num((*root)->l) - get_num((*root)->r);
+		if(sub >= -1 && sub <= 1)
+			break;
+		if(sub < -1)
+			turn_left(root);
+		else
+			turn_right(root);
+	}
+
+	balance(&(*root)->l);
+	balance(&(*root)->r);
+
+}
+
+
 int main()
 {
-	struct node_st *tree = NULL;
 	int arr[] = {1,2,3,7,6,5,9,8,4};
 	int i;
 	struct score_st tmp, *retp;
@@ -105,7 +179,7 @@ int main()
 
 	draw(tree);
 
-	balance(   );
+	balance(&tree);
 
 	draw(tree);
 
