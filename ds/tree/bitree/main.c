@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "queue.h"
+
 #define NAMESIZE	32
 
 struct score_st
@@ -83,7 +85,7 @@ void draw(struct node_st *root)
 
 	draw_(root,0);
 	printf("\n\n");
-	getchar();
+//	getchar();
 
 }
 
@@ -152,7 +154,40 @@ void balance(struct node_st **root)
 
 }
 
+#if 0
+void travel(struct node_st *root)
+{
+	if(root == NULL)
+		return ;
+	travel(root->l);
+	travel(root->r);
+	print_s(&root->data);
+}
+#else
+void travel(struct node_st *root)
+{
+	QUEUE *qu;
+	struct node_st *cur;
 
+	qu = queue_create(sizeof(struct node_st *));
+	/*if error*/
+
+	queue_en(qu, &root); 
+	
+	while(1)
+	{
+		if(queue_de(qu, &cur) != 0)
+			break;
+		print_s(&cur->data);
+		if(cur->l != NULL)
+			queue_en(qu,&cur->l);
+		if(cur->r != NULL)
+			queue_en(qu,&cur->r);
+	}	
+	queue_destroy(qu);
+}
+
+#endif
 int main()
 {
 	int arr[] = {1,2,3,7,6,5,9,8,4};
@@ -182,6 +217,9 @@ int main()
 	balance(&tree);
 
 	draw(tree);
+
+	travel(tree);
+
 
 	exit(0);
 }
