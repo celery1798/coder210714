@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "llist.h"
+#include <llist.h>
 
 #define NAMESIZE	32
 
