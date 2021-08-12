@@ -188,6 +188,38 @@ void travel(struct node_st *root)
 }
 
 #endif
+
+void delete(struct node_st **root, int id)
+{
+	struct node_st **node = root;
+	struct node_st *cur;
+
+	while( (*node) != NULL &&  (*node)->data.id != id )
+	{
+		if( id < (*node)->data.id )
+			node = &(*node)->l;
+		else
+			node = &(*node)->r;
+	}
+	
+	if(*node == NULL)
+		return ;
+	
+	cur = *node;
+
+	if(cur->l == NULL)
+		*node = cur->r;
+	else
+	{
+		*node = cur->l;
+		find_max(cur->l)->r = cur->r;
+	}
+	free(cur);
+
+}
+
+
+
 int main()
 {
 	int arr[] = {1,2,3,7,6,5,9,8,4};
@@ -218,7 +250,12 @@ int main()
 
 	draw(tree);
 
-	travel(tree);
+//	travel(tree);
+
+
+	int id = 3;
+	delete(&tree,id);
+	draw(tree);
 
 
 	exit(0);
