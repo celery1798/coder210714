@@ -22,9 +22,14 @@ int main()
 		list_insert_value(handler,&a[i]);
 	list_display(handler);
 
+	list_reverse(handler);
+	list_display(handler);
+
+/*
 	int tmp = 18;
 	list_delete_value(handler,&tmp);
 	list_display(handler);
+*/
 
 /*
 	list_insert(handler,15,&tmp);

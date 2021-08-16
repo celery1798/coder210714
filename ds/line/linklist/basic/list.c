@@ -184,7 +184,30 @@ void list_destroy(LIST *ptr)
 	free(ptr);
 }
 
+void list_reverse(LIST *ptr)		
+{
+	LIST *p,*q,*r;
 
+	if(ptr->next == NULL || ptr->next->next == NULL)
+		return ;
+	
+	p = ptr->next->next;
+	q = ptr->next;
+	r = NULL;
+	
+	while(p)
+	{
+		q->next = r;
+		r = q;
+		q = p;
+		p = p->next;
+	}
+
+	q->next = r;
+	r = q;
+	ptr->next = r;
+
+}
 
 
 
