@@ -1,0 +1,43 @@
+
+UNIX环境高级编程    APUE
+UNIX网络编程(2卷)	UNP
+圣经 
+易学难用
+3-16章
+
+随堂代码 
+大作业:组长收作业  yourname_homeworkname_v.tar.gz
+				   wangwendong_myls_0.tar.gz
+				   wangwendong_myls_1.tar.gz
+
+
+IO:	std(5) 
+	sys(3)
+
+	adv(14)
+
+
+并发:
+	信号(10)(8)
+	多线程(11,12)
+
+
+IPC
+	PIPE(15)
+	XSI:msg,sem,shm(15)
+	SOCKET:dgram,stream(16)
+
+
+
+杂:4,6,7  9,13
+
+
+
+网络:网络基础,UNP,TCP/IP详解(3)
+
+
+
+
+
+
+
