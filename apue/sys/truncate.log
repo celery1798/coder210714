@@ -1,0 +1,41 @@
+请写一个程序,功能:删除一个文本文件的第10行
+
+
+./a.out  file
+
+cat file 
+
+------------------------------
+
+fd = open();
+
+while()
+{
+	seek->r
+	read
+	seek->w
+	write
+
+}
+
+-------------------------------
+fd1 = open(r);
+fd2 = open(r+);
+
+len (10);
+len(total)
+
+seek->fd1->11
+seek->fd2->10
+
+while()
+{
+	read(fd1)
+	write(fd2);
+
+}
+
+truncate(total-10);
+
+
+
