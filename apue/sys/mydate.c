@@ -17,17 +17,29 @@ int main(int argc,char *argv[])
 	char fmtstr[TIMESTRSIZE] = {'\0'};
 	char timestr[TIMESTRSIZE];
 	int ch;
+	FILE *fp = stdout;
 
 	stamp = time(NULL);
 	tm = localtime(&stamp);
 
 	while(1)
 	{
-		ch = getopt(argc,argv,"y:mdH:MS");
+		ch = getopt(argc,argv,"-y:mdH:MS");
 		if(ch < 0)
 			break;
 		switch(ch)
 		{
+			case 1:
+				if(fp == stdout)
+				{
+					fp = fopen(argv[optind-1],"w");
+					if(fp == NULL)
+					{
+						perror("fopen()");
+						fp = stdout;
+					}
+				}
+				break;
 			case 'y':
 				if(strcmp(optarg,"2") == 0)
 					strncat(fmtstr,"%y ",TIMESTRSIZE);
@@ -62,8 +74,12 @@ int main(int argc,char *argv[])
 		}
 	}
 
+	strncat(fmtstr,"\n",TIMESTRSIZE);
 	strftime(timestr,TIMESTRSIZE,fmtstr,tm);
-	puts(timestr);
+	fputs(timestr,fp);
+
+	if(fp != stdout)
+		fclose(fp);
 
 	exit(0);
 }
