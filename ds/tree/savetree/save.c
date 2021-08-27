@@ -51,22 +51,40 @@ void draw(struct node_st *root)
 	draw_(root,0);
 }
 
-void save(struct node_st *root)
+
+void save_(struct node_st *root,  FILE *fp)
 {
-	putchar('(');
+	fputc('(',fp);
+	/*if error*/
+
 	if(root == NULL)
 	{
-		putchar(')');
+		fputc(')',fp);
 		return ;
 	}	
-	putchar(root->data);
+	fputc(root->data,fp);
 
-	save(root->l);
+	save_(root->l,fp);
 
-	save(root->r);
+	save_(root->r,fp);
 
-	putchar(')');
+	fputc(')',fp);
 
+}
+
+void save(struct node_st *root, const char *path)
+{
+	FILE *fp;
+	fp = fopen(path,"w");
+	if(fp == NULL)
+	{
+		perror("fopen()");
+		exit(1);
+	}
+
+	save_(root,fp);
+
+	fclose(fp);
 }
 
 int main()
@@ -81,9 +99,7 @@ int main()
 
 	draw(tree);
 
-	save(tree);
-
-	putchar('\n');
+	save(tree,"tree.log");
 
 	exit(0);
 }
