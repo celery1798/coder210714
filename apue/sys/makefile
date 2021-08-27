@@ -1,5 +1,8 @@
-CFLAGS+=-D_FILE_OFFSET_BITS=64
+CFLAGS+=-D_FILE_OFFSET_BITS=64 
+CFLAGS+=-D_XOPEN_SOURCE
+LDFLAGS+=-lcrypt
 
-
+%:%.c
+	gcc $(CFLAGS) $^ -o $@  $(LDFLAGS)
 
 
