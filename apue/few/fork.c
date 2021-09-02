@@ -33,7 +33,7 @@ int main()
 
 	printf("[%d]:End!\n",getpid());
 
-//	sleep(1000);
+	sleep(1000);
 
 	exit(0);
 }
