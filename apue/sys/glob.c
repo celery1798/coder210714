@@ -8,11 +8,11 @@
 #include <unistd.h>
 #include <glob.h> 
 
-#define PAT		"/etc/a*.conf"
+#define PAT		"/home/abc/a*"	//"/etc/a*.conf"
 
 int myerrfun(const char *epath, int eerrno)
 {
-	fprintf(stderr,"%s:%s\n",epath,strerror(eerrno);
+	fprintf(stderr,"%s:%s\n",epath,strerror(eerrno));
 }
 
 int main()
@@ -20,7 +20,7 @@ int main()
 	glob_t globres;
 	int i,err;
 
-	err = glob(PAT, 0, NULL/*myerrfun*/, &globres);
+	err = glob(PAT, 0, myerrfun, &globres);
 	if(err)
 	{
 		printf("ERROR CODE:%d\n",err);

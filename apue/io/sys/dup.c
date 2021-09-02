@@ -11,7 +11,7 @@
 int main()
 {
 	int fd;
-
+//	close(1);
 	fd = open("/tmp/out",O_WRONLY|O_CREAT|O_TRUNC,0600);
 	if(fd < 0)
 	{
