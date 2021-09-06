@@ -22,20 +22,32 @@ int main(int argc,char *argv[])
 		exit(1);
 	}
 
-	sfd = open(argv[1],O_RDONLY);
-	if(sfd < 0)
+	do
 	{
-		perror("open()");
-		exit(1);
-	}
+		sfd = open(argv[1],O_RDONLY);
+		if(sfd < 0)
+		{
+			if(errno != EINTR)
+			{
+				perror("open()");
+				exit(1);
+			}
+		}
+	}while(sfd < 0);
 
-	dfd = open(argv[2],O_WRONLY|O_CREAT|O_TRUNC,0600);
-	if(dfd < 0)
+	do
 	{
-		perror("fopen()");
-		exit(1);
-	}
-
+		dfd = open(argv[2],O_WRONLY|O_CREAT|O_TRUNC,0600);
+		if(dfd < 0)
+		{
+			if(errno != EINTR)
+			{
+				perror("fopen()");
+				exit(1);
+			}
+		}
+	}while(dfd < 0);
+	
 	while(1)
 	{
 		len = read(sfd,buf,BUFSIZE);
@@ -43,6 +55,8 @@ int main(int argc,char *argv[])
 			break;
 		if(len < 0)
 		{
+			if(errno == EINTR)
+				continue;
 			perror("read()");
 			exit(1);
 		}
@@ -53,7 +67,9 @@ int main(int argc,char *argv[])
 		{
 			ret = write(dfd,buf+pos,len);	
 			if(ret < 0)
-			{
+			{	
+				if(errno == EINTR)
+					continue;
 				perror("write()");
 				exit(1);
 			}
