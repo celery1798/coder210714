@@ -10,6 +10,9 @@
 
 #include "mytbf.h"
 
+#define SIGWAKEUP	SIGUSR1
+
+
 struct mytbf_st
 {
 	int cps;
@@ -23,6 +26,11 @@ typedef void (*sighandler_t)(int);
 static struct mytbf_st *job[MYTBF_MAX];
 static int inited = 1;
 static sighandler_t alrm_handler_save;
+
+static void usr1_handler(int s)
+{
+	return;
+}
 
 static void alrm_handler(int s)
 {
@@ -52,6 +60,8 @@ static void module_unload(void)
 
 static void module_load(void)
 {
+	signal(SIGWAKEUP,usr1_handler);
+
 	alrm_handler_save = signal(SIGALRM,alrm_handler);
 	alarm(1);
 	atexit(module_unload);
@@ -132,6 +142,7 @@ int mytbf_returntoken(mytbf_t *ptr,int n)
 	me->token += n;
 	if(me->token > me->burst)
 		me->token = me->burst;
+	raise(SIGWAKEUP);
 
 	return 0;
 }
