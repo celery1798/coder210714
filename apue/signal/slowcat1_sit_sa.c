@@ -21,13 +21,14 @@ void alrm_handler(int s)
 	if(token > BURST)
 		token = BURST;
 }
-
+	
 int main(int argc,char *argv[])
 {
 	int sfd,dfd = 1;
 	char buf[BUFSIZE];
 	ssize_t len,ret,pos;
 	struct itimerval itv;
+	struct sigaction sa;
 
 	if(argc < 2)
 	{
@@ -35,7 +36,19 @@ int main(int argc,char *argv[])
 		exit(1);
 	}
 
-	signal(SIGALRM,alrm_handler);
+//	signal(SIGALRM,alrm_handler);
+
+	sa.sa_handler = alrm_handler;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+
+	if(sigaction(SIGALRM,&sa,NULL) < 0)
+	{
+		perror("sigaction()");
+		exit(1);
+	}
+
+
 
 	itv.it_interval.tv_sec = 1;
 	itv.it_interval.tv_usec = 0;
