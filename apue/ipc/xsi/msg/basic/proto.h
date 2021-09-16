@@ -6,6 +6,8 @@
 
 #define NAMESIZE	32
 
+#define MYMSGTYPE	1
+
 struct msg_st
 {
 	long mtype;

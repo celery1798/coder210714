@@ -35,6 +35,9 @@ int main()
 			exit(1);
 		}
 	
+		if(rbuf.mtype != MYMSGTYPE)
+			continue;
+
 		printf("NAME:%s\n",rbuf.name);
 		printf("MATH:%d\n",rbuf.math);
 		printf("CHINESE:%d\n",rbuf.chinese);

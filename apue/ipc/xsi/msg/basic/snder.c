@@ -28,7 +28,7 @@ int main()
 		exit(1);
 	}
 
-	sbuf.mtype = 1;
+	sbuf.mtype = MYMSGTYPE;
 	strcpy(sbuf.name,"Alan");
 	sbuf.math = rand()%100;
 	sbuf.chinese = rand()%100;
