@@ -12,25 +12,9 @@
 
 int main(int argc,char *argv[])
 {
-    int sd,size;
+    int sd;
     struct sockaddr_in raddr;
-	struct msg_st *sbuf;
-
-	if(argc < 3)
-	{
-		fprintf(stderr,"Usage...\n");
-		exit(1);
-	}
-
-	if(strlen(argv[2]) > NAMEMAX-1)
-	{
-		fprintf(stderr,"Name is too long.\n");
-		exit(1);
-	}
-
-	size = sizeof(struct msg_st) + strlen(argv[2]);
-	sbuf = malloc(size);
-	/*if error*/
+	struct msg_st sbuf;
 
 	sd = socket(AF_INET,SOCK_DGRAM,0/*IPPROTO_UDP*/);
 	if(sd < 0)
@@ -41,15 +25,23 @@ int main(int argc,char *argv[])
 
 	//bind();
 
-	strcpy(sbuf->name,argv[2]);
-	sbuf->math = htonl(rand()%100);
-	sbuf->chinese = htonl(rand()%100);
+	int val = 1;
+	if(setsockopt(sd,SOL_SOCKET,SO_BROADCAST,&val,sizeof(val)) < 0)
+	{
+		perror("setsockopt()");
+		exit(1);
+	}
+
+	memset(&sbuf,'\0' ,sizeof(sbuf));
+	strcpy(sbuf.name,"Alan");
+	sbuf.math = htonl(rand()%100);
+	sbuf.chinese = htonl(rand()%100);
 
 	raddr.sin_family = AF_INET;
 	raddr.sin_port = htons(atoi(RCVER_PORT));
-	inet_pton(AF_INET,argv[1],&raddr.sin_addr);
+	inet_pton(AF_INET,"255.255.255.255",&raddr.sin_addr);
 
-	if(sendto(sd,sbuf,size,0,(void *)&raddr,sizeof(raddr)) < 0)
+	if(sendto(sd,&sbuf,sizeof(sbuf),0,(void *)&raddr,sizeof(raddr)) < 0)
 	{
 		perror("sendto()");
 		exit(1);
@@ -58,7 +50,6 @@ int main(int argc,char *argv[])
 	puts("OK");
 
 	close(sd);
-	free(sbuf);
 
 	exit(0);
 	
