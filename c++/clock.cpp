@@ -13,15 +13,17 @@ private:
 	int second;
 };
 void Clock::ShowTime()
-{	cout << hour << ":" << minute << ":" << second << endl;  }
+{	cout << hour << ":" << this->minute << ":" << second << endl;  }
 
 void Clock::SetTime(int h,int m,int s)
-{	hour = h; minute = m; second = s;	}
+{	this->hour = h; this->minute = m; second = s;	}
 
 int main()
 {
-	Clock c1;
+	Clock c1,c2;
 
+//	cout << sizeof(c1) << endl;
+	c2.SetTime(10,10,10);
 	c1.ShowTime();
 
 	return 0;
